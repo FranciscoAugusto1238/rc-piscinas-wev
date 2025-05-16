@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 
 import Login from '../views/login/LoginTela.vue';
 import Home from '../views/home/HomeTela.vue';
+import HomeCliente from '../views/home/HomeCliente.vue';
 import CadastroProduto from '../views/produto/CadastrarProduto.vue';
 import ListaProdutos from '../views/produto/ListarProduto.vue';
 import CadastrarUsuario from '../views/usuario/CadastrarUsuario.vue';
@@ -30,6 +31,7 @@ const routes = [
     children: [
       { path: '', redirect: '/home' },
       { path: 'home', name: 'Home', component: Home },
+      { path: 'principal', name: 'HomeCliente', component: HomeCliente },
       { path: 'cadastro-produto/:id?', name: 'CadastroProduto', component: CadastroProduto },
       { path: 'listar-produtos', name: 'ListaProdutos', component: ListaProdutos },
       { path: 'cadastrar-usuario/:id?', name: 'CadastrarUsuario', component: CadastrarUsuario },
@@ -51,9 +53,8 @@ const router = new VueRouter({
   routes,
 });
 
-// Guard global para proteger rotas que precisam de login
 router.beforeEach((to, from, next) => {
-  const publicPages = ['/login','/cadastrar-usuario'];
+  const publicPages = ['/login','/cadastrar-usuario','/principal'];
   const authRequired = !publicPages.includes(to.path);
   const usuarioLogado = localStorage.getItem('usuarioLogado');
 
